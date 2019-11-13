@@ -81,7 +81,15 @@ Car.prototype.fill = function(gallons) {
 };
 
 Car.prototype.drive = function(distance) {
+	//lets set some variables - we may discard them later
+	let fuelUsed = distance / this.milesPerGallon; // fuel used based on the distance travelled
+
 	this.odometer += distance;
+	this.tank -= fuelUsed;
+
+	if ((this.tank = 0)) {
+		return `I ran out of fuel at ${this.odometer} miles.`;
+	}
 };
 
 /*
@@ -91,9 +99,9 @@ Car.prototype.drive = function(distance) {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby(favoriteToy) {
-	Person.call(this, favoriteToy);
-	this.isChild = favoriteToy.isChild;
+function Baby(name, age, favoriteToy) {
+	Person.call(this, name, age, favoriteToy);
+	this.favoriteToy = favoriteToy;
 }
 Baby.prototype = Object.create(Person.prototype);
 
@@ -105,10 +113,10 @@ Baby.prototype.play = function() {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1.
-  2.
-  3.
-  4.
+  1. As a default, 'this' is Window Binding
+  2. in Implicit mode, always look to the left of 'this' in order to know what is being referenced. - This is the most common use
+  3. The call or apply methods define 'this' explicitly - They give clear cut cases on what is being referred to in 'this'
+  4. if used in a Constructor, 'this' referrs to the the object being created by the Constructor
 */
 
 ///////// END OF CHALLENGE /////////
